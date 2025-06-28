@@ -16,12 +16,16 @@ export const Sidebar: React.FC = () => {
     { id: 'favorites' as const, label: 'Favorites', icon: Heart },
   ];
 
+  // Don't render anything if sidebar is closed
+  if (!sidebarOpen) return null;
+
   return (
     <motion.aside
-      initial={{ x: -300 }}
-      animate={{ x: sidebarOpen ? 0 : -300 }}
+      initial={{ opacity: 0, x: -300 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -300 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`fixed left-0 top-0 h-full w-64 z-30 ${
+      className={`h-full w-64 ${
         darkMode 
           ? 'bg-gray-800/95 backdrop-blur-sm border-gray-700' 
           : 'bg-white/95 backdrop-blur-sm border-gray-200'

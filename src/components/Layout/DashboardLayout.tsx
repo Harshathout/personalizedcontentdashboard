@@ -24,14 +24,23 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
       darkMode ? 'dark bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
     }`}>
       <div className="flex h-screen overflow-hidden">
-        <Sidebar />
+        {/* Sidebar with conditional rendering based on sidebarOpen state */}
+        <motion.div
+          initial={false}
+          animate={{
+            width: sidebarOpen ? '16rem' : '0rem',
+            opacity: sidebarOpen ? 1 : 0
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="flex-shrink-0 overflow-hidden"
+        >
+          <Sidebar />
+        </motion.div>
         
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header />
           
-          <main className={`flex-1 overflow-auto transition-all duration-300 ${
-            sidebarOpen ? 'ml-0' : 'ml-0'
-          }`}>
+          <main className="flex-1 overflow-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
