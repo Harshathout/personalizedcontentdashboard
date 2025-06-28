@@ -1,17 +1,16 @@
-
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
 import { toggleSidebar, toggleDarkMode } from '@/store/slices/uiSlice';
 import { setSearchQuery, clearSearch, searchContent } from '@/store/slices/contentSlice';
 import { useDebounce } from '@/hooks/useDebounce';
 import { motion } from 'framer-motion';
 import { Menu, Search, Moon, Sun, Settings, Bell } from 'lucide-react';
+import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 
 export const Header: React.FC = () => {
-  const { darkMode } = useSelector((state: RootState) => state.ui);
-  const { searchQuery } = useSelector((state: RootState) => state.content);
-  const dispatch = useDispatch();
+  const { darkMode } = useAppSelector((state: RootState) => state.ui);
+  const { searchQuery } = useAppSelector((state: RootState) => state.content);
+  const dispatch = useAppDispatch();
   const [localSearchQuery, setLocalSearchQuery] = useState('');
   
   const debouncedSearchQuery = useDebounce(localSearchQuery, 300);

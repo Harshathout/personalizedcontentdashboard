@@ -1,17 +1,16 @@
-
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
 import { fetchContent, fetchTrending } from '@/store/slices/contentSlice';
 import { ContentGrid } from '@/components/Content/ContentGrid';
 import { motion } from 'framer-motion';
 import { TrendingUp, Heart, Rss, Loader2 } from 'lucide-react';
+import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 
 export const Dashboard: React.FC = () => {
-  const { activeTab, darkMode } = useSelector((state: RootState) => state.ui);
-  const { items, favorites, trending, loading, searchQuery, searchResults } = useSelector((state: RootState) => state.content);
-  const { preferences } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const { activeTab, darkMode } = useAppSelector((state: RootState) => state.ui);
+  const { items, favorites, trending, loading, searchQuery, searchResults } = useAppSelector((state: RootState) => state.content);
+  const { preferences } = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchContent({ page: 1, categories: preferences.categories }));
